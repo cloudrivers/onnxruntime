@@ -77,13 +77,9 @@ target_midl(winml_api_native_internal
 
 # Add static library that will be archived/linked for both static/dynamic library
 add_library(winml_lib_telemetry STATIC
-  ${winml_lib_telemetry_dir}/inc/TelemetryEvent.h
-  ${ONNXRUNTIME_INCLUDE_DIR}/core/platform/windows/TraceLoggingConfig.h
-  ${winml_lib_common_dir}/inc/WinMLTelemetryHelper.h
   ${winml_lib_telemetry_dir}/Telemetry.cpp
   ${winml_lib_telemetry_dir}/TelemetryEvent.cpp
   ${winml_lib_telemetry_dir}/WinMLTelemetryHelper.cpp
-  ${winml_lib_telemetry_dir}/pch.h
 )
 
 # Compiler options
@@ -122,25 +118,16 @@ target_link_libraries(winml_lib_telemetry PRIVATE wil)
 
 list(APPEND winml_adapter_files
     ${winml_adapter_dir}/CpuOrtSessionBuilder.cpp
-    ${winml_adapter_dir}/CpuOrtSessionBuilder.h
-    ${winml_adapter_dir}/CustomRegistryHelper.h
     ${winml_adapter_dir}/FeatureDescriptorFactory.cpp
-    ${winml_adapter_dir}/FeatureDescriptorFactory.h
     ${winml_adapter_dir}/LotusEnvironment.cpp
-    ${winml_adapter_dir}/LotusEnvironment.h
-    ${winml_adapter_dir}/pch.h
     ${winml_adapter_dir}/WinMLAdapter.cpp
-    ${winml_adapter_dir}/WinMLAdapter.h
     ${winml_adapter_dir}/ZeroCopyInputStreamWrapper.cpp
-    ${winml_adapter_dir}/ZeroCopyInputStreamWrapper.h
     )
 
 if (onnxruntime_USE_DML)
   list(APPEND winml_adapter_files
       ${winml_adapter_dir}/AbiCustomRegistryImpl.cpp
-      ${winml_adapter_dir}/AbiCustomRegistryImpl.h
       ${winml_adapter_dir}/DmlOrtSessionBuilder.cpp
-      ${winml_adapter_dir}/DmlOrtSessionBuilder.h
       )
 endif(onnxruntime_USE_DML)
 
@@ -195,17 +182,6 @@ list(APPEND onnxruntime_EXTERNAL_DEPENDENCIES winml_adapter)
 
 # Add static library that will be archived/linked for both static/dynamic library
 add_library(winml_lib_image STATIC
-  ${winml_lib_api_image_dir}/inc/ConverterResourceStore.h
-  ${winml_lib_api_image_dir}/inc/D3DDeviceCache.h
-  ${winml_lib_api_image_dir}/inc/DeviceHelpers.h
-  ${winml_lib_api_image_dir}/inc/ImageConversionHelpers.h
-  ${winml_lib_api_image_dir}/inc/ImageConversionTypes.h
-  ${winml_lib_api_image_dir}/inc/ImageConverter.h
-  ${winml_lib_api_image_dir}/inc/TensorToVideoFrameConverter.h
-  ${winml_lib_api_image_dir}/inc/VideoFrameToTensorConverter.h
-  ${winml_lib_api_image_dir}/CpuDetensorizer.h
-  ${winml_lib_api_image_dir}/CpuTensorizer.h
-  ${winml_lib_api_image_dir}/pch.h
   ${winml_lib_api_image_dir}/ConverterResourceStore.cpp
   ${winml_lib_api_image_dir}/D3DDeviceCache.cpp
   ${winml_lib_api_image_dir}/DeviceHelpers.cpp
@@ -270,39 +246,17 @@ endif(onnxruntime_USE_DML)
 
 # Add static library that will be archived/linked for both static/dynamic library
 add_library(winml_lib_api STATIC
-  ${winml_lib_api_dir}/impl/FeatureCompatibility.h
-  ${winml_lib_api_dir}/impl/IMapFeatureValue.h
-  ${winml_lib_api_dir}/impl/ISequenceFeatureValue.h
-  ${winml_lib_api_dir}/impl/MapBase.h
-  ${winml_lib_api_dir}/impl/SequenceBase.h
-  ${winml_lib_api_dir}/impl/Tensor.h
-  ${winml_lib_api_dir}/impl/TensorBase.h
-  ${winml_lib_api_dir}/impl/TensorBuffer.h
-  ${winml_lib_api_dir}/impl/TensorKindFrom.h
-  ${winml_lib_api_dir}/impl/TensorMemoryBufferReference.h
   ${winml_lib_api_dir}/ImageFeatureDescriptor.cpp
-  ${winml_lib_api_dir}/ImageFeatureDescriptor.h
   ${winml_lib_api_dir}/ImageFeatureValue.cpp
-  ${winml_lib_api_dir}/ImageFeatureValue.h
   ${winml_lib_api_dir}/LearningModel.cpp
-  ${winml_lib_api_dir}/LearningModel.h
   ${winml_lib_api_dir}/LearningModelBinding.cpp
-  ${winml_lib_api_dir}/LearningModelBinding.h
   ${winml_lib_api_dir}/LearningModelDevice.cpp
-  ${winml_lib_api_dir}/LearningModelDevice.h
   ${winml_lib_api_dir}/LearningModelEvaluationResult.cpp
-  ${winml_lib_api_dir}/LearningModelEvaluationResult.h
   ${winml_lib_api_dir}/LearningModelSession.cpp
-  ${winml_lib_api_dir}/LearningModelSession.h
   ${winml_lib_api_dir}/LearningModelSessionOptions.cpp
-  ${winml_lib_api_dir}/LearningModelSessionOptions.h
   ${winml_lib_api_dir}/MapFeatureDescriptor.cpp
-  ${winml_lib_api_dir}/MapFeatureDescriptor.h
   ${winml_lib_api_dir}/SequenceFeatureDescriptor.cpp
-  ${winml_lib_api_dir}/SequenceFeatureDescriptor.h
   ${winml_lib_api_dir}/TensorFeatureDescriptor.cpp
-  ${winml_lib_api_dir}/TensorFeatureDescriptor.h
-  ${winml_lib_api_dir}/pch/pch.h
 )
 
 # Compiler options
@@ -381,7 +335,6 @@ add_library(winml_dll SHARED
   ${CMAKE_CURRENT_BINARY_DIR}/winml_api/comp_generated/module.g.excl.cpp
   ${winml_dll_dir}/windows.ai.machinelearning.def
   ${winml_dll_dir}/winml.rc
-  ${winml_dll_dir}/pch.h
   ${winml_dll_dir}/module.cpp
 )
 
